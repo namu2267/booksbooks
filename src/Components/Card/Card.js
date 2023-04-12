@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Modal from "./Modal.js";
+import Modal from "../Modal/Modal.js";
+import "./Card.css";
 
 export default function Card({ book }) {
   console.log(book);
@@ -27,7 +28,7 @@ export default function Card({ book }) {
                 <img src={thumbnail} />
                 <div className="bottom">
                   <h3 className="title">{title}</h3>
-                  <p className="amount">&#8377; {amount} </p>
+                  <p className="amount"> {amount}원 </p>
                 </div>
               </div>
             </>

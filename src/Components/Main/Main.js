@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Card from "./Card.js";
+import Card from "../Card/Card.js";
 import axios from "axios";
-import Chat from "./Chat.js";
+import Chat from "../Chat/Chat.js";
+import "./Main.css";
 
 export default function Main() {
   const [search, setSearch] = useState("");
@@ -40,7 +41,8 @@ export default function Main() {
           <h1>BooksBooks</h1>
         </div>
         <div className="row2">
-          <h2>책을 찾아보세요</h2>
+          <h2>"오늘 뭐읽지?"</h2>
+          <h3>"What book should I read today?"</h3>
           <div className="search">
             <input
               type="text"
@@ -53,8 +55,8 @@ export default function Main() {
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </div>
-          <Chat />
         </div>
+        <Chat />
       </div>
       <div className="container">
         <Card book={bookData} />
