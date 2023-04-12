@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
+import Modal from "./Modal.js";
 
 export default function Card({ book }) {
   console.log(book);

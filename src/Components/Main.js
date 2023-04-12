@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Card from "./Card";
+import Card from "./Card.js";
 import axios from "axios";
+import Chat from "./Chat.js";
 
 export default function Main() {
   const [search, setSearch] = useState("");
@@ -52,6 +53,7 @@ export default function Main() {
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </div>
+          <Chat />
         </div>
       </div>
       <div className="container">
