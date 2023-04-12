@@ -11,11 +11,11 @@ export default function Card({ book }) {
     <>
       {book.map((item) => {
         let thumbnail =
-          item.volumeInfo.imageLinks &&
-          item.volumeInfo.imageLinks.smallThumbnail;
+          item.volumeInfo?.imageLinks &&
+          item.volumeInfo?.imageLinks.smallThumbnail;
         let amount = item.saleInfo.listPrice && item.saleInfo.listPrice.amount;
-        let title = item.volumeInfo.title;
-        if (thumbnail != undefined && amount != undefined) {
+        let title = item.volumeInfo?.title;
+        if (thumbnail !== undefined && amount !== undefined) {
           return (
             <>
               <div
