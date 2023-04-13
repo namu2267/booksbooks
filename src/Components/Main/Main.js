@@ -64,8 +64,10 @@ export default function Main() {
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </div>
+          <div className="chat-box">
+            <ChatGPT />
+          </div>
         </div>
-        <ChatGPT />
       </div>
       <div className="container">
         {bookData.map((book) => {

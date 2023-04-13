@@ -2,8 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@0;1&family=Nanum+Myeongjo&display=swap");
 
 * {
-  padding: 0;
-  margin: 0;
   font-family: "Nanum Myeongjo", "Bodoni Moda", serif;
 }
 
@@ -12,6 +10,8 @@
   --secondary-color: #6e613f;
 }
 body {
+  padding: 0;
+  margin: 0;
   background-color: var(--primary-color);
 }
 html {
@@ -27,7 +27,7 @@ html {
   position: relative;
   justify-content: space-between;
 }
-.header ::before {
+.header::before {
   content: "";
   position: absolute;
   top: 0;
@@ -41,34 +41,43 @@ html {
   z-index: -1;
 }
 .row2 {
-  position: absolute;
-  top: 10px;
-  right: 150px;
-  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-right: 30px;
 }
 .row2 h2 {
+  width: 100%;
+  text-align: center;
   font-size: 3rem;
   margin-top: 20px;
   margin-bottom: 15px;
+}
+
+.row2 h3 {
+  width: 100%;
+  text-align: center;
 }
 
 .row1 h1 {
   font-size: 3rem;
   text-align: center;
   margin-left: 35px;
+  color: #fff;
 }
 .search {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 .search input {
   outline: 0;
   border: 0;
   width: 350px;
   height: 35px;
-  padding: 0 0 0.5rem;
-  margin: 1rem;
+  padding: 0 12px;
+  margin-right: 1rem;
   font-size: 15px;
   font-weight: bold;
 }
@@ -87,6 +96,7 @@ html {
   grid-gap: 20px;
   box-sizing: border-box;
 }
-.chat-container {
-  display: flex;
+
+.chat-box {
+  width: 100%;
 }
