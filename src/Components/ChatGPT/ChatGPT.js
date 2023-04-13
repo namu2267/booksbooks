@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
-import "./Chat.css";
+import "./ChatGPT.css";
 
 export default function Chat() {
   const [inputValue, setInputValue] = useState("");

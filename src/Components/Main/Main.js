@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Card from "../Card/Card.js";
+import BookCard from "../BookCard/BookCard.js";
 import axios from "axios";
-import Chat from "../Chat/Chat.js";
+import ChatGPT from "../ChatGPT/ChatGPT.js";
 import "./Main.css";
+import BookDetailModal from "../BookDetailModal/BookDetailModal.js";
 
 export default function Main() {
   const [search, setSearch] = useState("");
-  const [bookData, setData] = useState([]);
+  const [bookData, setBookData] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   const searchBook = () => {
@@ -19,9 +21,8 @@ export default function Main() {
           `&key=${API_KEY}` +
           "&maxResults=40"
       )
-      .then((res) => setData(res.data.items))
+      .then((res) => setBookData(res.data.items))
       .catch((err) => console.log(err.response.data));
-    console.log(API_KEY);
   };
 
   const handleSearch = (e) => {
@@ -32,6 +33,14 @@ export default function Main() {
 
   const handleButtonClick = () => {
     searchBook();
+  };
+
+  const handleBookCardClick = (book) => {
+    setSelectedBook(book);
+  };
+
+  const handleCloseBookDetailModal = () => {
+    setSelectedBook(null);
   };
 
   return (
@@ -56,10 +65,26 @@ export default function Main() {
             </button>
           </div>
         </div>
-        <Chat />
+        <ChatGPT />
       </div>
       <div className="container">
-        <Card book={bookData} />
+        {bookData.map((book) => {
+          const { volumeInfo, saleInfo } = book;
+          const thumbnail = volumeInfo?.imageLinks?.smallThumbnail;
+          const amount = saleInfo?.listPrice?.amount;
+          const title = volumeInfo?.title;
+          if (thumbnail && amount && title) {
+            return (
+              <BookCard book={book} onBookCardClick={handleBookCardClick} />
+            );
+          }
+        })}
+        {selectedBook && (
+          <BookDetailModal
+            item={selectedBook}
+            onClose={handleCloseBookDetailModal}
+          />
+        )}
       </div>
     </>
   );
