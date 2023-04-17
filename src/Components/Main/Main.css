@@ -97,6 +97,12 @@ html {
   box-sizing: border-box;
 }
 
+.chat-title {
+  width: 100%;
+  color: black;
+  font-weight: bold;
+}
+
 .chat-box {
   width: 100%;
 }

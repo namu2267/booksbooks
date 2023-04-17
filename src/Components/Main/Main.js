@@ -7,32 +7,29 @@ import ChatGPT from "../ChatGPT/ChatGPT.js";
 import "./Main.css";
 import BookDetailModal from "../BookDetailModal/BookDetailModal.js";
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 export default function Main() {
   const [search, setSearch] = useState("");
   const [bookData, setBookData] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
-  const searchBook = () => {
-    axios
-      .get(
-        "https://www.googleapis.com/books/v1/volumes?q= " +
-          search +
-          `&key=${API_KEY}` +
-          "&maxResults=40"
-      )
-      .then((res) => setBookData(res.data.items))
-      .catch((err) => console.log(err.response.data));
-  };
-
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      searchBook();
+  const getBookData = () => {
+    if (search.trim()) {
+      axios
+        .get(
+          "https://www.googleapis.com/books/v1/volumes?q= " +
+            search +
+            `&key=${API_KEY}` +
+            "&maxResults=40"
+        )
+        .then((res) => setBookData(res.data.items))
+        .catch((err) => console.log(err.response.data));
     }
   };
 
-  const handleButtonClick = () => {
-    searchBook();
+  const handleSubmitSearch = () => {
+    getBookData();
   };
 
   const handleBookCardClick = (book) => {
@@ -58,11 +55,18 @@ export default function Main() {
               placeholder="책이름을 입력하세요"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              onKeyPress={handleSearch}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmitSearch();
+                }
+              }}
             />
-            <button onClick={handleButtonClick}>
+            <button onClick={handleSubmitSearch}>
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
+          </div>
+          <div className="chat-title">
+            <h3>책에 대해 궁금한거 물어보세요!!</h3>
           </div>
           <div className="chat-box">
             <ChatGPT />
@@ -83,7 +87,7 @@ export default function Main() {
         })}
         {selectedBook && (
           <BookDetailModal
-            item={selectedBook}
+            selectedBook={selectedBook}
             onClose={handleCloseBookDetailModal}
           />
         )}
