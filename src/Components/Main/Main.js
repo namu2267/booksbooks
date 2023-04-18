@@ -2,38 +2,22 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import BookCard from "../BookCard/BookCard.js";
-import axios from "axios";
 import ChatGPT from "../ChatGPT/ChatGPT.js";
 import "./Main.css";
 import BookDetailModal from "../BookDetailModal/BookDetailModal.js";
-
-const API_KEY = process.env.REACT_APP_API_KEY;
+import bookicon from "../../assets/bookicon.png";
+import { getBookData } from "../../API/Api.js";
 
 export default function Main() {
   const [search, setSearch] = useState("");
   const [bookData, setBookData] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
 
-  const getBookData = () => {
-    if (search.trim()) {
-      axios
-        .get(
-          "https://www.googleapis.com/books/v1/volumes?q= " +
-            search +
-            `&key=${API_KEY}` +
-            "&maxResults=40"
-        )
-        .then((res) => setBookData(res.data.items))
-        .catch((err) => console.log(err.response.data));
-    }
-  };
-
   const handleSubmitSearch = () => {
-    getBookData();
-  };
-
-  const handleBookCardClick = (book) => {
-    setSelectedBook(book);
+    getBookData(search).then((res) => {
+      console.log(res);
+      setBookData(res.data.items);
+    });
   };
 
   const handleCloseBookDetailModal = () => {
@@ -47,7 +31,8 @@ export default function Main() {
           <h1>BooksBooks</h1>
         </div>
         <div className="row2">
-          <h2>"오늘 뭐읽지?"</h2>
+          <img className="book-icon" src={bookicon} alt="book-icon" />
+          <h2>TodayBook</h2>
           <h3>"What book should I read today?"</h3>
           <div className="search">
             <input
@@ -73,16 +58,15 @@ export default function Main() {
           </div>
         </div>
       </div>
+
       <div className="container">
-        {bookData.map((book) => {
-          const { volumeInfo, saleInfo } = book;
-          const thumbnail = volumeInfo?.imageLinks?.smallThumbnail;
-          const amount = saleInfo?.listPrice?.amount;
-          const title = volumeInfo?.title;
-          if (thumbnail && amount && title) {
-            return (
-              <BookCard book={book} onBookCardClick={handleBookCardClick} />
-            );
+        {bookData.map((books) => {
+          if (
+            books.volumeInfo?.imageLinks?.smallThumbnail &&
+            books.saleInfo?.listPrice?.amount &&
+            books.volumeInfo?.title
+          ) {
+            return <BookCard books={books} setSelectedBook={setSelectedBook} />;
           }
         })}
         {selectedBook && (

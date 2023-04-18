@@ -1,14 +1,13 @@
 import React from "react";
 import "./BookCard.css";
 
-export default function BookCard({ book, onBookCardClick }) {
-  const { volumeInfo, saleInfo } = book;
-  const thumbnail = volumeInfo?.imageLinks?.smallThumbnail;
-  const amount = saleInfo?.listPrice?.amount;
-  const title = volumeInfo?.title;
+export default function BookCard({ books, setSelectedBook }) {
+  const thumbnail = books.volumeInfo?.imageLinks?.smallThumbnail;
+  const amount = books.saleInfo?.listPrice?.amount;
+  const title = books.volumeInfo?.title;
 
   const handleClick = () => {
-    onBookCardClick(book);
+    setSelectedBook(books);
   };
 
   return (
