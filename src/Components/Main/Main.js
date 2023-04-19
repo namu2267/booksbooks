@@ -7,6 +7,7 @@ import "./Main.css";
 import BookDetailModal from "../BookDetailModal/BookDetailModal.js";
 import bookicon from "../../assets/bookicon.png";
 import { getBookData } from "../../API/Api.js";
+import Posts from "../Posts/Posts.js";
 
 export default function Main() {
   const [search, setSearch] = useState("");
@@ -15,7 +16,7 @@ export default function Main() {
 
   const handleSubmitSearch = () => {
     getBookData(search).then((res) => {
-      console.log(res);
+      console.log("res ===>>>>", res);
       setBookData(res.data.items);
     });
   };
@@ -58,8 +59,8 @@ export default function Main() {
           </div>
         </div>
       </div>
-
-      <div className="container">
+      {/* 
+       <div className="container">
         {bookData.map((books) => {
           if (
             books.volumeInfo?.imageLinks?.smallThumbnail &&
@@ -75,7 +76,14 @@ export default function Main() {
             onClose={handleCloseBookDetailModal}
           />
         )}
-      </div>
+      </div>  */}
+      <Posts
+        bookData={bookData}
+        selectedBook={selectedBook}
+        setSelectedBook={setSelectedBook}
+        BookDetailModal={BookDetailModal}
+        handleCloseBookDetailModal={handleCloseBookDetailModal}
+      />
     </>
   );
 }
