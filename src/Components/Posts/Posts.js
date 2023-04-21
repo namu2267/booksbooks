@@ -12,7 +12,7 @@ export default function Posts({
   handleCloseBookDetailModal,
 }) {
   const [posts, setPosts] = useState([]);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
@@ -22,8 +22,7 @@ export default function Posts({
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(posts);
-
+  // console.log(posts);
   return (
     <div className="content-box">
       <header>

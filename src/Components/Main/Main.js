@@ -1,25 +1,13 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import BookCard from "../BookCard/BookCard.js";
-import ChatGPT from "../ChatGPT/ChatGPT.js";
 import "./Main.css";
 import BookDetailModal from "../BookDetailModal/BookDetailModal.js";
-import bookicon from "../../assets/bookicon.png";
-import { getBookData } from "../../API/Api.js";
 import Posts from "../Posts/Posts.js";
+import Search from "../Search/Search.js";
 
 export default function Main() {
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const [bookData, setBookData] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
-
-  const handleSubmitSearch = () => {
-    getBookData(search).then((res) => {
-      console.log("res ===>>>>", res);
-      setBookData(res.data.items);
-    });
-  };
 
   const handleCloseBookDetailModal = () => {
     setSelectedBook(null);
@@ -27,7 +15,8 @@ export default function Main() {
 
   return (
     <>
-      <div className="header">
+      <Search setBookData={setBookData} />
+      {/* <div className="header">
         <div className="row1">
           <h1>BooksBooks</h1>
         </div>
@@ -40,7 +29,7 @@ export default function Main() {
               type="text"
               placeholder="책이름을 입력하세요"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={onChangeInput}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
                   handleSubmitSearch();
@@ -58,7 +47,7 @@ export default function Main() {
             <ChatGPT />
           </div>
         </div>
-      </div>
+      </div> */}
       {/* 
        <div className="container">
         {bookData.map((books) => {

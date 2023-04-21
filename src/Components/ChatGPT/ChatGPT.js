@@ -21,6 +21,9 @@ export default function Chat() {
     const configuration = new Configuration({
       apiKey: process.env.REACT_APP_CHAT_API_KEY,
     });
+
+    delete configuration.baseOptions.headers["User-Agent"];
+
     const openai = new OpenAIApi(configuration);
 
     const response = await openai.createCompletion({

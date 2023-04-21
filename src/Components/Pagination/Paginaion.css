@@ -16,19 +16,19 @@ button {
   font-size: 1rem;
 }
 
-button &:hover {
+button :hover {
   background: tomato;
   cursor: pointer;
   transform: translateY(-2px);
 }
 
-button &[disabled] {
+button [disabled] {
   background: grey;
   cursor: revert;
   transform: revert;
 }
 
-button &[aria-current] {
+button [aria-current] {
   background: deeppink;
   font-weight: bold;
   cursor: revert;
