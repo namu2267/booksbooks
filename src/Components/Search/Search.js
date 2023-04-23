@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { getBookData } from "../../API/Api.js";
+import { getBookData, getBooksName } from "../../API/Api.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import ChatGPT from "../ChatGPT/ChatGPT.js";
 import bookicon from "../../assets/bookicon.png";
+import "./Search.css";
 
 export default function Search({ setBookData }) {
   const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState("");
 
   const handleSubmitSearch = () => {
-    getBookData(search).then((res) => {
+    getBookData(search, selected).then((res) => {
       console.log("res ===>>>>", res);
       setBookData(res.data.items);
     });
@@ -21,6 +23,12 @@ export default function Search({ setBookData }) {
     setSearch(value);
   };
 
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
+
+  console.log(selected);
+
   return (
     <div className="header">
       <div className="row1">
@@ -31,6 +39,10 @@ export default function Search({ setBookData }) {
         <h2>TodayBook</h2>
         <h3>"What book should I read today?"</h3>
         <div className="search">
+          <select onChange={handleSelect} value={selected}>
+            <option value="intitle">책이름</option>
+            <option value="inauthor">저자</option>
+          </select>
           <input
             type="text"
             placeholder="책이름을 입력하세요"

@@ -12,23 +12,53 @@ export default function Posts({
   handleCloseBookDetailModal,
 }) {
   const [posts, setPosts] = useState([]);
-  const [limit, setLimit] = useState(5);
+  const limit = 8;
+  // const [limit, setLimit] = useState(6);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
+  const formattedData = bookData
+    ?.filter(
+      (item) =>
+        item.volumeInfo?.imageLinks?.smallThumbnail &&
+        item.volumeInfo?.title &&
+        item.saleInfo?.listPrice?.amount
+    )
+    .slice(offset, offset + limit);
+
+  const test = async () => {
+    try {
+      const response = await getBookData();
+
+      // const { data, config } = response;
+      const { data } = response;
+      console.log(data);
+
+      setPosts(data.items);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  // async await으로 바꾸기
   useEffect(() => {
-    getBookData()
-      .then((res) => setPosts(res.data.items))
-      .catch((err) => console.log(err));
+    // getBookData()
+    //   .then((res) => setPosts(res.data.items))
+    //   .catch((err) => console.log(err));
+    test();
   }, []);
 
-  // console.log(posts);
+  useEffect(() => {
+    console.log("bookData", bookData);
+    console.log("offset", offset);
+    console.log(bookData.slice(0, 5));
+  });
   return (
     <div className="content-box">
       <header>
         <h1>게시물 목록</h1>
       </header>
-      <label>
+      {/* <label>
         페이지 당 표시할 게시물 수:&nbsp;
         <select
           type="number"
@@ -41,19 +71,17 @@ export default function Posts({
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-      </label>
+      </label> */}
       <main>
         <div className="container">
-          {bookData?.slice(offset, offset + limit).map((books) => {
-            if (
-              books.volumeInfo?.imageLinks?.smallThumbnail &&
-              books.saleInfo?.listPrice?.amount &&
-              books.volumeInfo?.title
-            ) {
-              return (
-                <BookCard books={books} setSelectedBook={setSelectedBook} />
-              );
-            }
+          {formattedData.map((books) => {
+            return (
+              <BookCard
+                key={books.id}
+                books={books}
+                setSelectedBook={setSelectedBook}
+              />
+            );
           })}
           {selectedBook && (
             <BookDetailModal
@@ -96,3 +124,9 @@ export default function Posts({
 // fetch("https://jsonplaceholder.typicode.com/posts")
 // .then((res) => res.json())
 // .then((data) => setPosts(data));
+
+//  if (
+//   books.volumeInfo?.imageLinks?.smallThumbnail &&
+//   books.saleInfo?.listPrice?.amount &&
+//   books.volumeInfo?.title
+// )

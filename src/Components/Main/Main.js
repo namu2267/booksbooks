@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Main.css";
 import BookDetailModal from "../BookDetailModal/BookDetailModal.js";
 import Posts from "../Posts/Posts.js";
@@ -12,6 +12,10 @@ export default function Main() {
   const handleCloseBookDetailModal = () => {
     setSelectedBook(null);
   };
+
+  useEffect(() => {
+    console.log("bookData", bookData);
+  });
 
   return (
     <>

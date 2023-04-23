@@ -18,95 +18,7 @@ body {
 html {
   font-size: 75.5%;
 }
-.header {
-  width: 100%;
-  height: 500px;
-  color: var(--secondary-color);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  position: relative;
-  justify-content: space-between;
-  background-color: aliceblue;
-}
-.header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(../../assets/library.jpg);
 
-  clip-path: circle(60% at left 300px);
-  z-index: 1;
-}
-.row1 {
-  position: relative;
-  z-index: 10;
-}
-.row2 {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-  margin-right: 30px;
-  width: 386px;
-  z-index: 10;
-}
-
-.row2 .book-icon {
-  position: fixed;
-  top: 45px;
-  right: 45px;
-  width: 50px;
-  padding-top: 10px;
-}
-.row2 h2 {
-  width: 100%;
-  text-align: center;
-  font-size: 3rem;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  font-family: "Bodoni Moda", serif;
-}
-
-.row2 h3 {
-  width: 100%;
-  text-align: center;
-  font-family: "Bodoni Moda", serif;
-}
-
-.row1 h1 {
-  font-size: 3rem;
-  text-align: center;
-  margin-left: 35px;
-  color: #fff;
-}
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-.search input {
-  outline: 0;
-  border: 0;
-  width: 350px;
-  height: 35px;
-  padding: 0 12px;
-  margin-right: 1rem;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-}
-.search button {
-  outline: none;
-  border: none;
-  height: 35px;
-  padding: 0 0.5rem;
-}
 .container {
   width: 60%;
   margin: 0 auto;
@@ -115,16 +27,6 @@ html {
   grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
   grid-gap: 20px;
   box-sizing: border-box;
-}
-
-.chat-title {
-  width: 100%;
-  color: black;
-  font-weight: bold;
-}
-
-.chat-box {
-  width: 100%;
 }
 
 @media (max-width: 768px) {

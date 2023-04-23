@@ -11,8 +11,15 @@ export const instance = axios.create({
   },
 });
 
-export const getBookData = (search) => {
-  const response = instance.get(`?q=${search}&key=${API_KEY}`);
+// export const getBookData = (search) => {
+//   const response = instance.get(`?q=${search}&key=${API_KEY}`);
+//   return response;
+// };
+
+export const getBookData = (search, selected) => {
+  const response = instance.get(
+    `?q=${search}+${selected}:keyes&key=${API_KEY}`
+  );
   return response;
 };
 
