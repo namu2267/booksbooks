@@ -26,7 +26,7 @@ export default function Posts({
     )
     .slice(offset, offset + limit);
 
-  const test = async () => {
+  const getApi = async () => {
     try {
       const response = await getBookData();
 
@@ -45,7 +45,7 @@ export default function Posts({
     // getBookData()
     //   .then((res) => setPosts(res.data.items))
     //   .catch((err) => console.log(err));
-    test();
+    getApi();
   }, []);
 
   useEffect(() => {
@@ -74,15 +74,16 @@ export default function Posts({
       </label> */}
       <main>
         <div className="container">
-          {formattedData.map((books) => {
-            return (
-              <BookCard
-                key={books.id}
-                books={books}
-                setSelectedBook={setSelectedBook}
-              />
-            );
-          })}
+          {formattedData &&
+            formattedData.map((books) => {
+              return (
+                <BookCard
+                  key={books.id}
+                  books={books}
+                  setSelectedBook={setSelectedBook}
+                />
+              );
+            })}
           {selectedBook && (
             <BookDetailModal
               selectedBook={selectedBook}
@@ -103,30 +104,3 @@ export default function Posts({
     </div>
   );
 }
-
-{
-  /* <BookCard
-              books={books}
-              setSelectedBook={setSelectedBook}
-              key={books.id}
-            /> */
-}
-
-// {
-//   /* <article key={id}>
-// <h3>
-//   {id}. {volumeInfo.title}
-// </h3>
-// <p>{volumeInfo.description}</p>
-// </article> */
-// }
-
-// fetch("https://jsonplaceholder.typicode.com/posts")
-// .then((res) => res.json())
-// .then((data) => setPosts(data));
-
-//  if (
-//   books.volumeInfo?.imageLinks?.smallThumbnail &&
-//   books.saleInfo?.listPrice?.amount &&
-//   books.volumeInfo?.title
-// )

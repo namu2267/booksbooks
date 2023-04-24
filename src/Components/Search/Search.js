@@ -10,11 +10,14 @@ export default function Search({ setBookData }) {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState("");
 
-  const handleSubmitSearch = () => {
-    getBookData(search, selected).then((res) => {
-      console.log("res ===>>>>", res);
-      setBookData(res.data.items);
-    });
+  const handleSubmitSearch = async () => {
+    try {
+      const response = await getBookData(search, selected);
+      console.log("res ===>>>>", response);
+      setBookData(response.data.items);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onChangeInput = (e) => {
