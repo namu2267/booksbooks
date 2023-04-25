@@ -13,7 +13,6 @@ export default function Posts({
 }) {
   const [posts, setPosts] = useState([]);
   const limit = 8;
-  // const [limit, setLimit] = useState(6);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
@@ -51,7 +50,7 @@ export default function Posts({
   useEffect(() => {
     console.log("bookData", bookData);
     console.log("offset", offset);
-    console.log(bookData.slice(0, 5));
+    // console.log(bookData.slice(0, 5));
   });
   return (
     <div className="content-box">
@@ -74,16 +73,15 @@ export default function Posts({
       </label> */}
       <main>
         <div className="container">
-          {formattedData &&
-            formattedData.map((books) => {
-              return (
-                <BookCard
-                  key={books.id}
-                  books={books}
-                  setSelectedBook={setSelectedBook}
-                />
-              );
-            })}
+          {formattedData?.map((books) => {
+            return (
+              <BookCard
+                key={books.id}
+                books={books}
+                setSelectedBook={setSelectedBook}
+              />
+            );
+          })}
           {selectedBook && (
             <BookDetailModal
               selectedBook={selectedBook}

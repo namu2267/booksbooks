@@ -2,18 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@0;1&family=Nanum+Myeongjo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@0;1&family=Nanum+Myeongjo&display=swap");
 
-* {
-  font-family: "Nanum Myeongjo", "Bodoni Moda", serif;
-}
-
 :root {
   --primary-color: #ffefc2;
   --secondary-color: #6e613f;
+  --primary-font-family: "Nanum Myeongjo", "Bodoni Moda", serif;
 }
 body {
   padding: 0;
   margin: 0;
-  /* background-color: var(--primary-color); */
+  background-color: var(--primary-color);
+  font-family: var(--primary-font-family);
 }
 html {
   font-size: 75.5%;

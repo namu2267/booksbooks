@@ -30,6 +30,12 @@ export default function Search({ setBookData }) {
     setSelected(e.target.value);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmitSearch();
+    }
+  };
+
   console.log(selected);
 
   return (
@@ -51,11 +57,7 @@ export default function Search({ setBookData }) {
             placeholder="책이름을 입력하세요"
             value={search}
             onChange={onChangeInput}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                handleSubmitSearch();
-              }
-            }}
+            onKeyPress={handleKeyPress}
           />
           <button onClick={handleSubmitSearch}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
